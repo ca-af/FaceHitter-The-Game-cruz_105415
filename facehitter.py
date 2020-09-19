@@ -49,7 +49,7 @@ def main():
 
     face = 0
     
-    clickCounter = randrange(10)
+    clickCounter = randrange(100)
     
     
     while (face < 7):    
