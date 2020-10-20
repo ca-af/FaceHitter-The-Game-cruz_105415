@@ -32,6 +32,12 @@ def randomPicker():
 def faceSelector(win):
     return faceDrawer(win)
 
+def setScore(x):
+    score += x
+    
+def getScore():
+    return score
+
 # Esta función dibuja las carras (faltan tres).
 def faceDrawer(win):
     face1 = Circle(Point(150, 150), 100)
@@ -69,7 +75,7 @@ def faceDrawer(win):
 
 # Las reglas del juego son mostrados al jugador.
 def gameRules(win, face1, eye1, eye2, pupil1, pupil2, nose, mouth):
-    #Escribe las reglas al usuario
+    # Escribe las reglas al usuario
     message = Text(Point(150, 30), "Click anywhere to start the game")
     message.setFace("arial")
     message.setStyle("bold italic")
@@ -91,7 +97,14 @@ def gameSession(win, face1, eye1, eye2, pupil1, pupil2, nose, mouth, message):
     part2 = True
     part3 = True
     part4 = True
+    score = 0
     
+    messageScore = Text(Point(145, 272), "Score: " + str(score))
+    messageScore.setFace("helvetica")
+    messageScore.setStyle("bold italic")
+    messageScore.setTextColor('yellow')
+    messageScore.draw(win)
+        
     # El juego verifica si se ha hecho clic en una determinada parte de la 
     # cara la cantidad de veces especificada.
     while (part1 == True or part2 == True or part3 == True or part4 == True):
@@ -112,6 +125,13 @@ def gameSession(win, face1, eye1, eye2, pupil1, pupil2, nose, mouth, message):
                 message.setStyle("bold italic")
                 message.setTextColor('white')
                 message.draw(win)
+                score += 5
+                messageScore.undraw()
+                messageScore = Text(Point(145, 272), "Score: " + str(score))
+                messageScore.setFace("helvetica")
+                messageScore.setStyle("bold italic")
+                messageScore.setTextColor('yellow')
+                messageScore.draw(win)
                 while (clickCounter == 0):
                     eye1.undraw()
                     pupil1.undraw()
@@ -142,6 +162,13 @@ def gameSession(win, face1, eye1, eye2, pupil1, pupil2, nose, mouth, message):
                 message.setStyle("bold italic")
                 message.setTextColor('white')
                 message.draw(win)
+                score += 5
+                messageScore.undraw()
+                messageScore = Text(Point(145, 272), "Score: " + str(score))
+                messageScore.setFace("helvetica")
+                messageScore.setStyle("bold italic")
+                messageScore.setTextColor('yellow')
+                messageScore.draw(win)
                 while (clickCounter == 0):
                     eye2.undraw()
                     pupil2.undraw()
@@ -172,6 +199,13 @@ def gameSession(win, face1, eye1, eye2, pupil1, pupil2, nose, mouth, message):
                 message.setStyle("bold italic")
                 message.setTextColor('white')
                 message.draw(win)
+                score += 5
+                messageScore.undraw()
+                messageScore = Text(Point(145, 272), "Score: " + str(score))
+                messageScore.setFace("helvetica")
+                messageScore.setStyle("bold italic")
+                messageScore.setTextColor('yellow')
+                messageScore.draw(win)
                 while (clickCounter == 0):
                     nose.undraw()
                     clickCounter = randomPicker()
@@ -201,6 +235,13 @@ def gameSession(win, face1, eye1, eye2, pupil1, pupil2, nose, mouth, message):
                 message.setStyle("bold italic")
                 message.setTextColor('white')
                 message.draw(win)
+                score += 5
+                messageScore.undraw()
+                messageScore = Text(Point(145, 272), "Score: " + str(score))
+                messageScore.setFace("helvetica")
+                messageScore.setStyle("bold italic")
+                messageScore.setTextColor('yellow')
+                messageScore.draw(win)
                 while (clickCounter == 0):
                     mouth.undraw()
                     clickCounter = randomPicker()
@@ -216,10 +257,10 @@ def gameSession(win, face1, eye1, eye2, pupil1, pupil2, nose, mouth, message):
         else:
             break
                 
-    endGame(win, face1, message)
+    endGame(win, face1, message, messageScore, score)
 
 # El juego se acaba si el usuario gana o no
-def endGame(win, face1, message):
+def endGame(win, face1, message, messageScore, score):
     face1.undraw()
     message.undraw()
     message = Text(Point(150, 150), "You did it!")
@@ -227,12 +268,26 @@ def endGame(win, face1, message):
     message.setStyle("bold italic")
     message.setTextColor('white')
     message.draw(win)
+    
+    messageScore.undraw()
+    messageScore = Text(Point(140, 100), "Score: ")
+    messageScore.setFace("arial")
+    messageScore.setStyle("bold italic")
+    messageScore.setTextColor('white')
+    messageScore.draw(win)
+    
+    displayScore = Text(Point(175, 100), str(score))
+    displayScore.setFace("arial")
+    displayScore.setStyle("bold italic")
+    displayScore.setTextColor('yellow')
+    displayScore.draw(win)
+    
     message2 = Text(Point(150, 170), "Click again to close the game!")
     message2.setFace("arial")
     message2.setStyle("bold italic")
     message2.setTextColor('white')
     message2.draw(win)
-                    
+    
     win.getMouse()
             
 #Aqui se hace la pantalla del juego
